@@ -8,7 +8,7 @@ public:
 	WholePopulation();
 	~WholePopulation();
 	int newPartialGeneration();
-	void newWholeGeneration(int cnt);
+	void newWholeGeneration();
 	void evaluation();
 	void congestion(int rank,vector<int> rank_s);
 	void printsolution();

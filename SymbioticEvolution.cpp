@@ -1,6 +1,6 @@
 #include "SymbioticEvolution.h"
 
-// �R���X�g���N�^
+// コンストラクタ
 SymbioticEvolution::SymbioticEvolution()
 {
 	int i, j;
@@ -19,7 +19,7 @@ SymbioticEvolution::SymbioticEvolution()
 	//wpop->printsolution();
 }
 
-// �f�X�g���N�^
+// デストラクタ
 SymbioticEvolution::~SymbioticEvolution()
 {
 	int i;
@@ -28,7 +28,7 @@ SymbioticEvolution::~SymbioticEvolution()
 	delete wpop;
 }
 
-// �i��
+// 探索
 void SymbioticEvolution::solve(void)
 {
 	int gen, i, j, cnt;
@@ -36,41 +36,23 @@ void SymbioticEvolution::solve(void)
 	for(gen = 1; gen <=	GENERATION_MAX; gen++) {
 		cout << "第" << gen << "世代" << endl;
 
-		//wpop->printsolution();
-		//cout << " checkpointNewPaP" << endl;
 		//部分解Pt+1
 		cnt = wpop->newPartialGeneration();
-		//cout << "部分解Pt" << endl;
-		//cout << cnt << endl;
 
 		//部分解Qt+1
 		ppop[0]->newGeneration(cnt);
-		//cout << "部分解Qt" << endl;
 
 		//全体解Qt+1
-		wpop->newWholeGeneration(cnt);
-		//cout << "全体解Qt" << endl;
+		wpop->newWholeGeneration();
 
-		// 初期化
+		// 部分解適応度初期化
 		ppop[0]->evalinit();
-		//cout << "評価1" << endl;
+
+		//パレートランキングによる評価
 		wpop->evaluation();
-		//cout << "評価" << endl;
+		
 		//wpop->printfitness();
-
 		//wpop->printsolution();
-
-		//cout << "第" << gen << "世代完了" << endl;
-		/*
-		if(wpop->pop[0]->fitness < bestfit) {
-			bestfit = wpop->pop[0]->fitness;
-			for(i = 0; i < WCHROM_LEN; i++) {
-				for(j = 0; j < PCHROM_LEN; j++)
-					best[i*PCHROM_LEN+j] = wpop->pop[0]->chrom[i]->chrom[j];
-			}
-			printf("��%d����\t�ŗǌ̂̓K���x��%f\n", gen, bestfit);
-		}
-		*/
 	}
 	wpop->printfitness();
 }

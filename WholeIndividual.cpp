@@ -3,7 +3,7 @@
 
 PartialPopulation** WholeIndividual::ppop = NULL;
 
-// �R���X�g���N�^
+// コンストラクタ
 WholeIndividual::WholeIndividual()
 {
 	int i;
@@ -14,64 +14,13 @@ WholeIndividual::WholeIndividual()
 	rankfit = DBL_MAX;
 }
 
-// �f�X�g���N�^
+// デストラクタ
 WholeIndividual::~WholeIndividual()
 {
 
 }
 
-// �����㐶���i�����_���j
-void WholeIndividual::newGeneration()
-{
-	int i;
-
-	for(i = 0; i < WCHROM_LEN; i++)
-		chrom[i] = ppop[0]->pop[rand() % PPOP_SIZE];
-	fitness = 0;
-	rankfit = DBL_MAX;
-}
-
-// �����㐶���i�R�s�[���ˑR�ψفj
-// p: �R�s�[���̂ւ̃|�C���^
-void WholeIndividual::newGeneration(WholeIndividual* p)
-{
-	int i;
-	
-	for(i = 0; i < WCHROM_LEN; i++)
-		chrom[i] = p->chrom[i];
-	mutate();
-	fitness = 0;
-	rankfit = DBL_MAX;
-}
-
-// �����㐶���i�Q�_�������ˑR�ψفj
-// p1: �e�̂��̂P
-// p2: �e�̂��̂Q
-// index1: �����_�i0�`WCHROM_LEN-1�j
-// index2: �����_�i0�`WCHROM_LEN-1�j
-void WholeIndividual::newGeneration(WholeIndividual* p1, WholeIndividual* p2, int index1, int index2)
-{
-	int i, min, max;
-
-	if(index1 < index2) {
-		min = index1;
-		max = index2;
-	} else {
-		min = index2;
-		max = index1;
-	}
-	for(i = 0; i < min; i++)
-		chrom[i] = p1->chrom[i];
-	for( ; i < max; i++)
-		chrom[i] = p2->chrom[i];
-	for( ; i < PCHROM_LEN; i++)
-		chrom[i] = p1->chrom[i];
-	mutate();
-	fitness = 0;
-	rankfit = DBL_MAX;
-}
-
-// �ˑR�ψ�
+// 全体解突然変異
 void WholeIndividual::mutate()
 {
 	int i;
@@ -82,7 +31,7 @@ void WholeIndividual::mutate()
 	}
 }
 
-// �]��
+// 目的関数
 void WholeIndividual::objective_evaluation()
 {
 	int i, j;

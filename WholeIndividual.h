@@ -9,9 +9,6 @@ public:
 
 	WholeIndividual();
 	~WholeIndividual();
-	void newGeneration();
-	void newGeneration(WholeIndividual* p);
-	void newGeneration(WholeIndividual* p1, WholeIndividual* p2, int index1, int index2);
 	void objective_evaluation();
 	void mutate();
 
@@ -20,6 +17,4 @@ public:
 	long double fitness2;
 	double fitness;
 	double rankfit;
-
-private:
 };

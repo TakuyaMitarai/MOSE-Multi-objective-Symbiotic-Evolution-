@@ -10,18 +10,17 @@
 #include <iostream>
 using namespace std;
 
-// �萔�̒�`
-#define GENERATION_MAX	400			// �����㐔
-#define WPOP_SIZE		800					// �S�̉��W�c���̌̂̐�
-#define PPOP_SIZE		600						// �������W�c���̌̂̐�
-#define MUTATE_PROB		0.02					// �ˑR�ψيm��
-#define MUTATE_PROB2	0.001					// �ˑR�ψيm��
-#define MUTATE_PROBI	MUTATE_PROB*RAND_MAX	// �ˑR�ψيm���~�����̍ő�l
-#define MUTATE_PROBI2	MUTATE_PROB2*RAND_MAX	// �ˑR�ψيm���~�����̍ő�l
-#define MAX_NUM			WCHROM_LEN*PCHROM_LEN	// �t���C�h���ɂ�����N
-#define WCHROM_LEN		2						// �S�̉��̐��F�̂̒���
-#define PCHROM_LEN		5						// �������̐��F�̂̒���
-#define TOURNAMENT_SIZE 10
+// 定数
+#define GENERATION_MAX	800						// 世代交代数
+#define WPOP_SIZE		800						// 全体解個体数
+#define PPOP_SIZE		1200					// 部分個体数
+#define MUTATE_PROB		0.022					// 部分解突然変異確率
+#define MUTATE_PROB2	0.001					// 全体解突然変異確率
+#define MUTATE_PROBI	MUTATE_PROB*RAND_MAX	// 部分解突然変異 * RAND_MAX
+#define MUTATE_PROBI2	MUTATE_PROB2*RAND_MAX	// 全体解突然変異 * RAND_MAX
+#define WCHROM_LEN		2						// 全体解遺伝子数
+#define PCHROM_LEN		5						// 部分解遺伝子数
+#define TOURNAMENT_SIZE 10						// 混雑度トーナメント数
 #define PI				3.141592
 
 class PartialIndividual
@@ -31,7 +30,6 @@ public:
 	~PartialIndividual();
 	void PartialIndividualInit();
 	void newGeneration();
-	void newGeneration(PartialIndividual* p);
 	void newGeneration(PartialIndividual* p1, PartialIndividual* p2, int index1, int index2);
 
 	double chrom[PCHROM_LEN];	// ���F��

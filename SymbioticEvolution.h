@@ -9,9 +9,6 @@ public:
 	~SymbioticEvolution();
 	void solve();
 
-	int best[MAX_NUM];
-	double bestfit;
-
 	WholePopulation* wpop;
 	PartialPopulation* ppop[3];
 };

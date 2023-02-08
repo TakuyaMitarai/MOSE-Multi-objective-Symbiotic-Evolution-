@@ -1,6 +1,6 @@
 #include "WholePopulation.h"
 
-// �R���X�g���N�^
+// コンストラクタ
 WholePopulation::WholePopulation()
 {
 	int i;
@@ -9,7 +9,7 @@ WholePopulation::WholePopulation()
 		pop[i] = new WholeIndividual();
 }
 
-// �f�X�g���N�^
+// デストラクタ
 WholePopulation::~WholePopulation()
 {
 	int i;
@@ -18,7 +18,7 @@ WholePopulation::~WholePopulation()
 		delete pop[i];
 }
 
-// �����㐶��
+// Pp(t+1)生成
 int WholePopulation::newPartialGeneration()
 {
 	int i, j, k,a, b, index1, index2;
@@ -59,37 +59,21 @@ int WholePopulation::newPartialGeneration()
 	return cnt;
 }
 
-void WholePopulation::newWholeGeneration(int cnt)
+// Pw(t+1), Qw(t+1)生成
+void WholePopulation::newWholeGeneration()
 {
-	int i, j, length;
-	//length =  WholeIndividual::ppop[0]->pop.size();
+	int i, j;
 
-	for(i = 0; i < WPOP_SIZE; i++) {
-		pop[i]->fitness = 0;
-		pop[i]->fitness1 = 0;
-		pop[i]->fitness2 = 0;
-		pop[i]->rankfit = DBL_MAX;
-	}
-
-	for(i = WPOP_SIZE; i < WPOP_SIZE * 2; i++) {
-		/*
-		for(j = 0; j < WCHROM_LEN; j++) {
-			pop[i]->chrom[j] = WholeIndividual::ppop[0]->pop[rand() % length];
-		}
-		*/
-		pop[i]->fitness = 0;
-		pop[i]->fitness1 = 0;
-		pop[i]->fitness2 = 0;
-		pop[i]->rankfit = DBL_MAX;
-	}
 	for(i = 0; i < WPOP_SIZE * 2; i++) {
+		pop[i]->fitness = 0;
+		pop[i]->fitness1 = 0;
+		pop[i]->fitness2 = 0;
+		pop[i]->rankfit = DBL_MAX;
 		pop[i]->mutate();
 	}
 }
 
-// �����ɃN�C�b�N�\�[�g
-// lb : �J�n�_�Y��
-// ub : �I���_�Y��
+// パレートランキングに関するクイックソート
 void WholePopulation::sort(int lb, int ub)
 {
 	int i, j, k;
@@ -139,7 +123,6 @@ void WholePopulation::evaluation()
 	for(i = 0; i < WPOP_SIZE * 2; i++) {
 		pop[i]->objective_evaluation();
 	}
-	//cout << "完了" << endl; 
 	while(current_cnt < WPOP_SIZE * 2) {
 		cnt = current_cnt;
 		now_s = next_s;
@@ -169,32 +152,19 @@ void WholePopulation::evaluation()
 		rank++;
 	}
 	sort(0, WPOP_SIZE * 2 - 1);
-	//printsolution();
-	/*
-	for(j = 0; j < WPOP_SIZE * 2 - cnt; j++) {
-		cout << pop[j]->rankfit << endl;
-	}
-	*/
-
-	/*
-	for(i = 0; i < WPOP_SIZE * 2; i++) {
-		//pop[num]->fitness += 1 / (congestion(CONGESTIONNUM * (int)(WPOP_SIZE / CONGESTIONNUM), i) + 1);
-		pop[i]->fitness = congestion(CONGESTIONNUM * (int)(WPOP_SIZE / CONGESTIONNUM), i);
-	}
-	*/
 	//部分解の適応度
 	for(i = 0; i < WPOP_SIZE * 2; i++) {
 		// 参照先の個体の適応度を算出
 		for(j = 0; j < WCHROM_LEN; j++) {
 			if(pop[i]->chrom[j]->fitness < pop[i]->fitness) {
 				pop[i]->chrom[j]->fitness = pop[i]->fitness;
-				//cout << pop[i]->chrom[j]->fitness << endl;
 			}
 		}
 		
 	}
 }
 
+//混雑度
 void WholePopulation::congestion(int i, vector<int> rank_s)
 {
 	int j;
@@ -219,14 +189,10 @@ void WholePopulation::congestion(int i, vector<int> rank_s)
 				pop[rank_s[j]]->fitness += (pop[rank_s[j+1]]->fitness2 - pop[rank_s[j-1]]->fitness2) / (pop[rank_s[rank_s.size()-1]]->fitness2 - pop[rank_s[0]]->fitness2);
 			}
 		}
-	}	
-	/*
-	for(j = 0; j < rank_s.size(); j++) {
-		cout << i << " " << pop[rank_s[j]]->fitness << " " << pop[rank_s[j]]->fitness1 << " " << pop[rank_s[j]]->fitness2 << endl;
 	}
-	*/
 }
 
+// 目的関数1に関するソート
 void WholePopulation::sortobject(int lb, int ub, vector<int> rank_s)
 {
 	int i, j, k;
@@ -255,6 +221,7 @@ void WholePopulation::sortobject(int lb, int ub, vector<int> rank_s)
 	}
 }
 
+//目的関数2に関するソート
 void WholePopulation::sortobject2(int lb, int ub, vector<int> rank_s)
 {
 	int i, j, k;
@@ -283,6 +250,7 @@ void WholePopulation::sortobject2(int lb, int ub, vector<int> rank_s)
 	}
 }
 
+// 解表示
 void WholePopulation::printsolution()
 {
 	int i, j, k;
@@ -297,6 +265,7 @@ void WholePopulation::printsolution()
 	}
 }
 
+//目的関数表示
 void WholePopulation::printfitness()
 {
 	int i, j, k;

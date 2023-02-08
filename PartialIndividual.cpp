@@ -1,16 +1,17 @@
 #include "PartialIndividual.h"
 
-// �R���X�g���N�^
+// コンストラクタ
 PartialIndividual::PartialIndividual()
 {
 }
 
-// �f�X�g���N�^
+// デストラクタ
 PartialIndividual::~PartialIndividual()
 {
 
 }
 
+// 初期化
 void PartialIndividual::PartialIndividualInit()
 {
 	int i;
@@ -23,30 +24,14 @@ void PartialIndividual::PartialIndividualInit()
 	fitness = 0;
 }
 
-// �����㐶���i�ˑR�ψق̂݁j
+// 次世代
 void PartialIndividual::newGeneration()
 {
 	mutate();
 	fitness = 0;
 }
 
-// �����㐶���i�R�s�[���ˑR�ψفj
-// p: �R�s�[���̂ւ̃|�C���^
-void PartialIndividual::newGeneration(PartialIndividual* p)
-{
-	int i;
-	
-	for(i = 0; i < PCHROM_LEN; i++)
-		chrom[i] = p->chrom[i];
-	mutate();
-	fitness = 0;
-}
-
-// �����㐶���i�Q�_�������ˑR�ψفj
-// p1: �e�̂��̂P
-// p2: �e�̂��̂Q
-// index1: �����_�i0�`PCHROM_LEN-1�j
-// index2: �����_�i0�`PCHROM_LEN-1�j
+// 二点交叉
 void PartialIndividual::newGeneration(PartialIndividual* p1, PartialIndividual* p2, int index1, int index2)
 {
 	int i, min, max;
@@ -68,7 +53,7 @@ void PartialIndividual::newGeneration(PartialIndividual* p1, PartialIndividual* 
 	fitness = 0;
 }
 
-// �ˑR�ψ�
+// 突然変異
 void PartialIndividual::mutate()
 {
 	int i;

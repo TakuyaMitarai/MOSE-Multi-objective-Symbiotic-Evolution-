@@ -24,20 +24,6 @@ int main()
 	// 処理時間計算
 	comptime = (float)(clock() - start) / CLOCKS_PER_SEC;
 
-	// 結果表示
-	/*
-	printf("集合A：");
-	for(i = 0; i < MAX_NUM; i++) {
-		if(se->best[i] == 1)
-			printf("%d ", i+1);
-	}
-	printf("\n集合B：");
-	for(i = 0; i < MAX_NUM; i++) {
-		if(se->best[i] == 0)
-			printf("%d ", i+1);
-	}
-	printf("\n最良個体の適応度：%f\n", se->bestfit);
-	*/
 	printf("処理時間：%f秒\n", comptime);
 
 	// 後処理

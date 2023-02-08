@@ -1,11 +1,11 @@
 #include "PartialPopulation.h"
 
-// �R���X�g���N�^
+// コンストラクタ
 PartialPopulation::PartialPopulation()
 {
 }
 
-// �f�X�g���N�^
+// デストラクタ
 PartialPopulation::~PartialPopulation()
 {
 	int i;
@@ -14,16 +14,7 @@ PartialPopulation::~PartialPopulation()
 		delete pop[i];
 }
 
-void PartialPopulation::DeleteNextPartialPopulation()
-{
-	int i;
-	int size = pop.size();
-	//cout << size << endl;
-	for(i = 0; i < size; i++){
-		delete pop[i];
-	}
-}
-
+//部分解初期化
 void PartialPopulation::PartialPopulationInit()
 {
 	int i;
@@ -33,18 +24,12 @@ void PartialPopulation::PartialPopulationInit()
 	}
 }
 
-// �����㐶��
+// 混雑度トーナメントによるQp(t+1)生成
 void PartialPopulation::newGeneration(int cnt)
 {
 	int i, j, k, a, fit1, tmp1, tmp2, index1, index2;
 	int size = cnt;
 
-	/*
-	for(k = 0; k < cnt; k++) {
-		cout << pop[k]->fitness << endl;
-	}
-	*/
-	
 	for(k = cnt; k < cnt * 2; k++) {
 		tmp1 = rand() % size + cnt;
 		fit1 = pop[tmp1]->fitness;
@@ -73,49 +58,11 @@ void PartialPopulation::newGeneration(int cnt)
 		pop[i]->newGeneration();
 }
 
-// �]��
-void PartialPopulation::evaluation()
-{
-	sort(0, PPOP_SIZE - 1);
-}
-
-// �]���l������
+// 適応度初期化
 void PartialPopulation::evalinit()
 {
 	int i;
 	
 	for(i = 0; i < pop.size(); i++)
 		pop[i]->fitness = 0;
-}
-
-// pop��fitness�̒l�ɂ���ď����Ƀ\�[�g�i�N�C�b�N�\�[�g�j
-// lb : �\�[�g����pop�͈̔͂̍ŏ��C���f�b�N�X
-// rb : �\�[�g����pop�͈̔͂̍ő�C���f�b�N�X
-void PartialPopulation::sort(int lb, int ub)
-{
-	int i, j, k;
-	double pivot;
-	PartialIndividual* swap;
-
-	if(lb < ub) {
-		k = (lb + ub) / 2;
-		pivot = pop[k]->fitness;
-		i = lb;
-		j = ub;
-		do {
-			while(pop[i]->fitness < pivot)
-				i++;
-			while(pop[j]->fitness > pivot)
-				j--;
-			if(i <= j) {
-				swap = pop[i];
-				pop[i] = pop[j];
-				pop[j] = swap;
-				i++;
-				j--;
-			}
-		} while(i <= j);
-		sort(lb, j);
-		sort(i, ub);
-	}
 }
