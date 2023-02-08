@@ -44,7 +44,7 @@ void PartialPopulation::newGeneration(int cnt)
 		fit1 = pop[tmp2]->fitness;
 		for(i = 0; i < TOURNAMENT_SIZE; i++) {
 			a = rand() % size + cnt;
-			if(fit1 > pop[a]->fitness) {
+			if(fit1 < pop[a]->fitness) {
 				fit1 = pop[a]->fitness;
 				tmp2 = a;
 			}
@@ -54,7 +54,7 @@ void PartialPopulation::newGeneration(int cnt)
 
 		pop[k]->newGeneration(pop[tmp1], pop[tmp2], index1, index2);
 	}
-	for(i = 0; i < cnt; i++)
+	for(i = cnt; i < cnt * 2; i++)
 		pop[i]->newGeneration();
 }
 

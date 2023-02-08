@@ -151,6 +151,9 @@ void WholePopulation::evaluation()
 		congestion(rank, rank_s);
 		rank++;
 	}
+	for(i = 0; i < WPOP_SIZE * 2; i++) {
+		pop[i]->rankfit += 1 / (pop[i]->fitness * 1000 + 1);
+	}
 	sort(0, WPOP_SIZE * 2 - 1);
 	//部分解の適応度
 	for(i = 0; i < WPOP_SIZE * 2; i++) {
