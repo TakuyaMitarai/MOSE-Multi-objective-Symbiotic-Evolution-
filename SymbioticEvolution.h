@@ -10,5 +10,5 @@ public:
 	void solve();
 
 	WholePopulation* wpop;
-	PartialPopulation* ppop[3];
+	PartialPopulation* ppop[4];
 };

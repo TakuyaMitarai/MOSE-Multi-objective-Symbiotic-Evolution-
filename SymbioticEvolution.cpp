@@ -23,8 +23,9 @@ SymbioticEvolution::SymbioticEvolution()
 SymbioticEvolution::~SymbioticEvolution()
 {
 	int i;
-	delete ppop[0];
-	delete ppop[1];
+	for(i = 0; i < 3; i++) {
+		delete ppop[i];
+	}
 	delete wpop;
 }
 
@@ -55,4 +56,5 @@ void SymbioticEvolution::solve(void)
 		//wpop->printsolution();
 	}
 	wpop->printfitness();
+	//wpop->printsolution();
 }

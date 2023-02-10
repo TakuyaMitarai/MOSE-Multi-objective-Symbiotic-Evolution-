@@ -10,7 +10,7 @@ PartialPopulation::~PartialPopulation()
 {
 	int i;
 	int size = pop.size();
-	for(i = 0; i < pop.size(); i++)
+	for(i = 0; i < size; i++)
 		delete pop[i];
 }
 

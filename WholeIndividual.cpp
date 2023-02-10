@@ -91,6 +91,7 @@ void WholeIndividual::objective_evaluation()
 	*/
 
 	//ZDT4
+	/*
 	fitness1 = (chrom[0]->chrom[0] + 5) / 10;
 	for(i = 0; i < WCHROM_LEN; i++) {
 		for(j = 0; j < PCHROM_LEN; j++){
@@ -103,6 +104,27 @@ void WholeIndividual::objective_evaluation()
 	hx = 1 - pow(fitness1/gx, 0.5);
 
 	fitness2 = gx * hx;
+	*/
+	
+	//KUR
+	fitness1 = 0;
+	for(i = 0; i < WCHROM_LEN; i++) {
+		for(j = 0; j < PCHROM_LEN; j++){
+			if(i != WCHROM_LEN - 1 || j != PCHROM_LEN - 1) {
+				if(j == PCHROM_LEN - 1) {
+					fitness1 += -10 * pow(2.71828, -0.2 * sqrt(chrom[i]->chrom[j] * chrom[i]->chrom[j] + chrom[i+1]->chrom[0] * chrom[i+1]->chrom[0]));
+				} else{
+					fitness1 += -10 * pow(2.71828, -0.2 * sqrt(chrom[i]->chrom[j] * chrom[i]->chrom[j] + chrom[i]->chrom[j + 1] * chrom[i]->chrom[j + 1]));
+				}
+			}
+		}
+	}
+	fitness2 = 0;
+	for(i = 0; i < WCHROM_LEN; i++) {
+		for(j = 0; j < PCHROM_LEN; j++){
+			fitness2 += pow(abs(chrom[i]->chrom[j]), 0.8) + 5 * sin(chrom[i]->chrom[j] * chrom[i]->chrom[j] * chrom[i]->chrom[j]);
+		}
+	}
 
 	//cout << fitness1 << " " << fitness2 << endl;
 }

@@ -24,7 +24,7 @@ int WholePopulation::newPartialGeneration()
 	int i, j, k,a, b, index1, index2;
 	int cnt = 0, tcnt = 0;
 	int flag;
-	int length;
+	int length, length1;
 
 	for(i = 0; i < WPOP_SIZE; i++) {
 		for(j = 0; j < WCHROM_LEN; j++) {
@@ -45,13 +45,23 @@ int WholePopulation::newPartialGeneration()
 				for(k = 0; k < PCHROM_LEN; k++) {
 					WholeIndividual::ppop[2]->pop[length-1]->chrom[k] = pop[i]->chrom[j]->chrom[k];
 				}
-				//cout << "aa" << endl;
 				pop[i + WPOP_SIZE]->chrom[j] = WholeIndividual::ppop[2]->pop[length-1];
-				//cout << "bb" << endl;
 				cnt++;
 			}
 		}
 	}
+	
+	//メモリ解放
+	WholeIndividual::ppop[3] = new PartialPopulation();
+	std::sort(WholeIndividual::ppop[0]->pop.begin(), WholeIndividual::ppop[0]->pop.end());
+	std::sort(WholeIndividual::ppop[1]->pop.begin(), WholeIndividual::ppop[1]->pop.end());
+	set_difference(WholeIndividual::ppop[0]->pop.begin(), WholeIndividual::ppop[0]->pop.end(), 
+			  WholeIndividual::ppop[1]->pop.begin(), WholeIndividual::ppop[1]->pop.end(),
+			  back_inserter(WholeIndividual::ppop[3]->pop));
+	length = WholeIndividual::ppop[3]->pop.size();
+	cout << cnt << " " << length << " " << WholeIndividual::ppop[0]->pop.size() << " " << WholeIndividual::ppop[1]->pop.size() << endl;
+	delete WholeIndividual::ppop[3];
+
 	WholeIndividual::ppop[1]->pop.insert(WholeIndividual::ppop[1]->pop.end(),WholeIndividual::ppop[2]->pop.begin(),WholeIndividual::ppop[2]->pop.end());
 	WholeIndividual::ppop[0] = WholeIndividual::ppop[1];
 	WholeIndividual::ppop[1] = new PartialPopulation();

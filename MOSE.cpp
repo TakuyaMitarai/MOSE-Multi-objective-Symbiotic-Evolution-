@@ -24,7 +24,7 @@ int main()
 	printf("処理時間：%f秒\n", comptime);
 
 	// 後処理
-	//delete se;
+	delete se;
 
 	return 0;
 }
