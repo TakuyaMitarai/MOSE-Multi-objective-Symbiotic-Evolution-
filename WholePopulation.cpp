@@ -18,7 +18,7 @@ WholePopulation::~WholePopulation()
 		delete pop[i];
 }
 
-// Pp(t+1)生成
+// Qp(t+1)生成
 int WholePopulation::newPartialGeneration()
 {
 	int i, j, k,a, b, index1, index2;
@@ -26,6 +26,8 @@ int WholePopulation::newPartialGeneration()
 	int flag;
 	int length, length1;
 
+	//Qw(t)が参照している部分解個体をQp(t+1)に格納
+	//Qw(t)とQw(t)が参照している部分解個体をそれぞれTMPwとTMPiにコピー
 	for(i = 0; i < WPOP_SIZE; i++) {
 		for(j = 0; j < WCHROM_LEN; j++) {
 			flag = 1;
@@ -69,7 +71,7 @@ int WholePopulation::newPartialGeneration()
 	return cnt;
 }
 
-// Pw(t+1), Qw(t+1)生成
+// Qw(t+1), Rw(t+1)生成
 void WholePopulation::newWholeGeneration()
 {
 	int i, j;

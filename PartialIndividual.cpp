@@ -19,7 +19,7 @@ void PartialIndividual::PartialIndividualInit()
 	for(i = 0; i < PCHROM_LEN; i++) {
 		//chrom[i] =  (double)(rand() % 60000) / 1000 - 30;
 		//chrom[i] =  (double)(rand() % 80000) / 10000 - 4;
-		chrom[i] =  (double)(rand() % 10000) / 1000 - 5; //ZDT4
+		chrom[i] =  (double)(rand() % 10000) / 1000 - 5; //ZDT4・ KUR
 	}
 	fitness = 0;
 }
@@ -60,7 +60,7 @@ void PartialIndividual::mutate()
 
 	for(i = 0; i < PCHROM_LEN; i++) {
 		if(rand() < MUTATE_PROBI){
-			chrom[i] =  (double)(rand() % 10000) / 1000 - 5; //ZDT4
+			chrom[i] =  (double)(rand() % 10000) / 1000 - 5; //ZDT4・KUR
 			//chrom[i] =  (double)(rand() % 60000) / 1000 - 30;
 			//chrom[i] =  (double)(rand() % 80000) / 10000 - 4;
 		}

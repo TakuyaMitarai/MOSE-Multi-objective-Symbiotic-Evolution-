@@ -65,6 +65,7 @@ void WholeIndividual::objective_evaluation()
 	fitness2 = gx * hx;
 	*/
 
+	//Fonseca-fleming function
 	/*
 	fitness1 = chrom[0]->chrom[0];
 	for(i = 0; i < WCHROM_LEN; i++) {
@@ -125,6 +126,5 @@ void WholeIndividual::objective_evaluation()
 			fitness2 += pow(abs(chrom[i]->chrom[j]), 0.8) + 5 * sin(chrom[i]->chrom[j] * chrom[i]->chrom[j] * chrom[i]->chrom[j]);
 		}
 	}
-
 	//cout << fitness1 << " " << fitness2 << endl;
 }

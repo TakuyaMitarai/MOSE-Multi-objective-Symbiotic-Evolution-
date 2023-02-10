@@ -5,10 +5,10 @@ SymbioticEvolution::SymbioticEvolution()
 {
 	int i, j;
 
-	// �����W�c����
+	// 部分解初期化
 	ppop[0] = new PartialPopulation();
 	ppop[0]->PartialPopulationInit();
-	//next_gen
+	// 次世代部分解初期化
 	ppop[1] = new PartialPopulation();
 	ppop[2] = new PartialPopulation();
 	WholeIndividual::ppop = ppop;
@@ -37,13 +37,13 @@ void SymbioticEvolution::solve(void)
 	for(gen = 1; gen <=	GENERATION_MAX; gen++) {
 		cout << "第" << gen << "世代" << endl;
 
-		//部分解Pt+1
+		//部分解Qt+1
 		cnt = wpop->newPartialGeneration();
 
-		//部分解Qt+1
+		//部分解Rt+1
 		ppop[0]->newGeneration(cnt);
 
-		//全体解Qt+1
+		//全体解Rt+1
 		wpop->newWholeGeneration();
 
 		// 部分解適応度初期化

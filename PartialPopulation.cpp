@@ -24,7 +24,7 @@ void PartialPopulation::PartialPopulationInit()
 	}
 }
 
-// 混雑度トーナメントによるQp(t+1)生成
+// 混雑度トーナメント・二点交叉によるRp(t+1)生成
 void PartialPopulation::newGeneration(int cnt)
 {
 	int i, j, k, a, fit1, tmp1, tmp2, index1, index2;
@@ -54,6 +54,7 @@ void PartialPopulation::newGeneration(int cnt)
 
 		pop[k]->newGeneration(pop[tmp1], pop[tmp2], index1, index2);
 	}
+	//部分解個体の突然変異
 	for(i = cnt; i < cnt * 2; i++)
 		pop[i]->newGeneration();
 }

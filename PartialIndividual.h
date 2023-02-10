@@ -33,8 +33,8 @@ public:
 	void newGeneration();
 	void newGeneration(PartialIndividual* p1, PartialIndividual* p2, int index1, int index2);
 
-	double chrom[PCHROM_LEN];	// ���F��
-	double fitness;			// �K���x
+	double chrom[PCHROM_LEN];	// 染色体
+	double fitness;			// 適応度
 
 private:
 	void mutate();
