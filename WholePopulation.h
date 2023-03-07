@@ -14,7 +14,7 @@ public:
 	void printsolution();
 	void printfitness();
 
-	WholeIndividual* pop[WPOP_SIZE*2];	// �̏W�c
+	WholeIndividual* pop[WPOP_SIZE*2];	// 全体解個体
 
 private:
 	void sort(int lb, int ub);

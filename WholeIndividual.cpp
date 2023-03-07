@@ -90,6 +90,20 @@ void WholeIndividual::objective_evaluation()
 	fitness1 = 1 - pow(2.71828, -sum1);
 	fitness2 = 1 - pow(2.71828, -sum2);
 	*/
+	/*
+	//ZDT3
+	fitness1 = chrom[0]->chrom[0];
+	for(i = 0; i < WCHROM_LEN; i++) {
+		for(j = 0; j < PCHROM_LEN; j++){
+			if(i != 0 || j != 0) {
+				gx += chrom[i]->chrom[j];
+			}
+		}
+	}
+	gx = 1 + 9 * gx / (WCHROM_LEN * PCHROM_LEN - 1);
+	hx = 1 - pow(fitness1 / gx, 0.5) - fitness1 / gx * sin(10 * PI * fitness1);
+	fitness2 = gx * hx;
+	*/
 
 	//ZDT4
 	/*
@@ -106,6 +120,22 @@ void WholeIndividual::objective_evaluation()
 
 	fitness2 = gx * hx;
 	*/
+
+	/*
+	//Discontinuous Pareto-optimal front
+	fitness1 = chrom[0]->chrom[0];
+	for(i = 0; i < WCHROM_LEN; i++) {
+		for(j = 0; j < PCHROM_LEN; j++){
+			if(i != 0 || j != 0) {
+				gx += chrom[i]->chrom[j];
+			}
+		}
+	}
+	gx = 1 + 10 * gx / (WCHROM_LEN * PCHROM_LEN - 1);
+	hx = 1 - pow(fitness1 / gx, 0.25) - fitness1 / gx * sin(10 * PI * fitness1);
+	fitness2 = gx * hx;
+	*/
+
 	
 	//KUR
 	fitness1 = 0;

@@ -61,7 +61,7 @@ int WholePopulation::newPartialGeneration()
 			  WholeIndividual::ppop[1]->pop.begin(), WholeIndividual::ppop[1]->pop.end(),
 			  back_inserter(WholeIndividual::ppop[3]->pop));
 	length = WholeIndividual::ppop[3]->pop.size();
-	cout << cnt << " " << length << " " << WholeIndividual::ppop[0]->pop.size() << " " << WholeIndividual::ppop[1]->pop.size() << endl;
+	cout << length << " " << WholeIndividual::ppop[0]->pop.size() << " " << WholeIndividual::ppop[1]->pop.size() << endl;
 	delete WholeIndividual::ppop[3];
 
 	WholeIndividual::ppop[1]->pop.insert(WholeIndividual::ppop[1]->pop.end(),WholeIndividual::ppop[2]->pop.begin(),WholeIndividual::ppop[2]->pop.end());
@@ -160,11 +160,14 @@ void WholePopulation::evaluation()
 				current_cnt++;
 			}
 		}
-		congestion(rank, rank_s);
+		if(cnt < WPOP_SIZE){
+			congestion(rank, rank_s);
+		}
 		rank++;
 	}
 	for(i = 0; i < WPOP_SIZE * 2; i++) {
 		pop[i]->rankfit += 1 / (pop[i]->fitness * 1000 + 1);
+		pop[i]->fitness = pop[i]->rankfit;
 	}
 	sort(0, WPOP_SIZE * 2 - 1);
 	//部分解の適応度

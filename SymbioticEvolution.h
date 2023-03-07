@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WholePopulation.h"
+#include "matplotlib.h"
 
 class SymbioticEvolution
 {

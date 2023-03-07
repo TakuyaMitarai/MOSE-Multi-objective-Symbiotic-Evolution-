@@ -12,11 +12,12 @@ SymbioticEvolution::SymbioticEvolution()
 	ppop[1] = new PartialPopulation();
 	ppop[2] = new PartialPopulation();
 	WholeIndividual::ppop = ppop;
+
+	// 全体解初期化
 	wpop = new WholePopulation();
-	//wpop->printsolution();
+
+	//パレートランキングと混雑距離による評価
 	wpop->evaluation();
-	cout << "初期化完了" << endl;
-	//wpop->printsolution();
 }
 
 // デストラクタ
@@ -33,6 +34,8 @@ SymbioticEvolution::~SymbioticEvolution()
 void SymbioticEvolution::solve(void)
 {
 	int gen, i, j, cnt;
+	vector<double> x, y;
+	matplotlib g;
 
 	for(gen = 1; gen <=	GENERATION_MAX; gen++) {
 		cout << "第" << gen << "世代" << endl;
@@ -49,11 +52,8 @@ void SymbioticEvolution::solve(void)
 		// 部分解適応度初期化
 		ppop[0]->evalinit();
 
-		//パレートランキングによる評価
+		//パレートランキングと混雑距離による評価
 		wpop->evaluation();
-		
-		//wpop->printfitness();
-		//wpop->printsolution();
 	}
 	wpop->printfitness();
 	//wpop->printsolution();
